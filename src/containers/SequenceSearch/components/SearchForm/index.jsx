@@ -113,7 +113,6 @@ const mapStateToProps = (state) => ({
   textSearchError: state.textSearchError,
   infernalEntries: state.infernalEntries,
   fileUpload: state.fileUpload,
-  exactMatch: state.exactMatch,
 });
 
 const mapDispatchToProps = (dispatch) => ({

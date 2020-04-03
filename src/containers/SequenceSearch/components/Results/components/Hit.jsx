@@ -13,7 +13,6 @@ class Hit extends React.Component {
     });
     const showExpertDb = images.filter(({src, title}) => newExpertDb.includes(title));
     const database = this.props.databases;
-    const exactMatchUrsId = this.props.exactMatchUrsId.indexOf(this.props.entry.rnacentral_id) > -1 ? <i className="icon icon-functional" data-icon="/" style={{fontSize: "75%", color: "#3c763d"}}> </i> : '';
     let seqTitleStyle = {
       color: this.props.customStyle && this.props.customStyle.seqTitleColor ? this.props.customStyle.seqTitleColor : "",
       fontSize: this.props.customStyle && this.props.customStyle.seqTitleSize ? this.props.customStyle.seqTitleSize : "20px",
@@ -25,7 +24,7 @@ class Hit extends React.Component {
     return (
       <li>
         <a className="custom-link" style={seqTitleStyle} href={`https://www.ncbi.nlm.nih.gov/nuccore/${this.props.entry.rnacentral_id}`} target='_blank'>
-          {exactMatchUrsId} {this.props.entry.description}
+          {this.props.entry.description}
         </a>
         {database.length === 0 && <div className="mt-2" style={seqInfoStyle}>{ this.props.entry.rnacentral_id } {showExpertDb.map((db, index) => <img key={index} className="ml-2" src={db.src} style={{height: "16px"}} />)}</div>}
         {database.length === 0 ? '' : <div className="mt-2" style={seqInfoStyle}>{this.props.entry.target_length} nucleotides</div>}

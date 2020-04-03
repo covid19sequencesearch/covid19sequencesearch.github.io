@@ -43,15 +43,6 @@ class Results extends React.Component {
     const similarSeqText = this.props.customStyle && this.props.customStyle.similarSeqText ? this.props.customStyle.similarSeqText : "Similar sequences";
     const jobIdBackgroundColor = this.props.customStyle && this.props.customStyle.jobIdBackgroundColor ? this.props.customStyle.jobIdBackgroundColor : "";
 
-    // exact match URS ids
-    const exactMatch = this.props.exactMatch;
-    let exactMatchUrsId = [];
-    if (exactMatch && exactMatch.hitCount > 0) {
-      const exactMatchIds = Object.entries(exactMatch).map(([key, value]) => {
-          value && value.length && value.map(item => exactMatchUrsId.push(item.id))
-        })
-    }
-
     return (
       <div className="rna">
         {
@@ -204,7 +195,7 @@ class Results extends React.Component {
                   <div className="col-sm-9">
                     <section>
                       { this.props.entries.map((entry, index) => (
-                      <ul className="list-unstyled" key={`${entry}_${index}`}><Hit entry={entry} customStyle={this.props.customStyle} databases={this.props.databases} exactMatchUrsId={exactMatchUrsId}/></ul>
+                      <ul className="list-unstyled" key={`${entry}_${index}`}><Hit entry={entry} customStyle={this.props.customStyle} databases={this.props.databases} /></ul>
                       )) }
                       {this.props.status === "loading" ? <div className="spinner-border" role="status" /> : (this.props.status === "success" || this.props.status === "partial_success") && (this.props.entries.length < this.props.hitCount) && (<button className="btn btn-secondary" onClick={this.props.onLoadMore} style={{background: loadMoreButtonColor}}>Load more</button>)}
                     </section>
@@ -238,7 +229,6 @@ function mapStateToProps(state) {
     jobList: state.jobList,
     infernalEntries: state.infernalEntries,
     infernalAlignmentsCollapsed: state.infernalAlignmentsCollapsed,
-    exactMatch: state.exactMatch,
     rnacentral: state.rnacentral,
   };
 }
