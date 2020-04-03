@@ -20,37 +20,6 @@ class SearchForm extends React.Component {
     store.dispatch(actionCreators.onSubmit(sequence, this.props.databases));
   }
 
-  showExactMatch(){
-    const exactMatch = this.props.exactMatch;
-    const database = this.props.databases;
-
-    if (exactMatch && exactMatch.hitCount > 0) {
-      const exactMatchBackgroundColor = this.props.customStyle && this.props.customStyle.exactMatchBackgroundColor ? this.props.customStyle.exactMatchBackgroundColor : "";
-      const exactMatchDescription = exactMatch.entries[0].fields.description[0];
-      const exactMatchId = exactMatch.entries[0].id;
-      const exactMatchUrl = exactMatch.entries[0].fields.url[0];
-      const exactMatchUrsId = exactMatchId.split('_')[0];
-      const remainingExactMatch = exactMatch.hitCount > 1 ? (exactMatch.hitCount - 1) : null;
-      const exactMatchOther = remainingExactMatch && remainingExactMatch > 1 ? remainingExactMatch + ' other sequences' : remainingExactMatch && remainingExactMatch === 1 ? remainingExactMatch + ' other sequence' : '';
-
-      return <div className="row">
-        <div className="col-sm-9">
-          <div className="alert alert-success" style={{backgroundColor: exactMatchBackgroundColor}}>
-            {
-              database.length === 0 ? <div>
-                Identical match: <a className="custom-link" href={`https://rnacentral.org/rna/${exactMatchId}`} target='_blank'>{exactMatchDescription}</a>
-                {exactMatchOther && ' and '}
-                {exactMatchOther ? <a className="custom-link" href={`https://rnacentral.org/search?q=${exactMatchUrsId}*`} target='_blank'>{exactMatchOther}</a> : ''}
-              </div> : <div>
-                Identical match: <a className="custom-link" href={exactMatchUrl} target='_blank'>{exactMatchDescription}</a>
-              </div>
-            }
-          </div>
-        </div>
-      </div>
-    }
-  }
-
   onSubmit(event) {
     event.preventDefault();
     const state = store.getState();
@@ -125,9 +94,6 @@ class SearchForm extends React.Component {
                 </div>
               </div>
             )
-          }
-          {
-            this.showExactMatch()
           }
         </form>
       </div>
