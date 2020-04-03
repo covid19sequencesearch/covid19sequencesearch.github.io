@@ -12,12 +12,12 @@ class Facets extends React.Component {
   }
 
   renameFacet(facet){
-    if (facet==='QC warning found') {
-      return 'QC warnings'
-    } else if (facet==='Has GO annotation') {
-      return 'GO annotations'
-    } else if (facet==='Has Conserved structure') {
-      return 'Conserved motifs'
+    if (facet==='TAXONOMY') {
+      return 'Viruses'
+    } else if (facet==='country') {
+      return 'Country'
+    } else if (facet==='sequencing_method') {
+      return 'Sequencing method'
     } else {
       return facet
     }
@@ -29,7 +29,7 @@ class Facets extends React.Component {
       fontSize: this.props.customStyle && this.props.customStyle.facetSize ? this.props.customStyle.facetSize : "20px",
     };
     return [
-      <legend key={`legend-${facet.id}`}><span style={facetStyle}>{ this.renameFacet(facet.label) }</span></legend>,
+      <legend key={`legend-${facet.id}`}><span style={facetStyle}>{ this.renameFacet(facet.id) }</span></legend>,
       <ul key={facet.id} className="list-unstyled facet">
         {
           facet.facetValues.map(facetValue => (
