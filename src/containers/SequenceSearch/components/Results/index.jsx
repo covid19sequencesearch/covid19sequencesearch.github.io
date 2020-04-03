@@ -67,17 +67,6 @@ class Results extends React.Component {
           )
         }
         {
-          (this.props.jobId && this.props.jobList && !this.props.jobList.length > 0 || this.props.jobId && this.props.jobList && this.props.jobList.length > 0 && !this.props.jobList.includes(this.props.jobId) ) && (
-            <div className="row" key={`job-id`}>
-              <div className="col-sm-9">
-                <div className="alert alert-secondary" style={{backgroundColor: jobIdBackgroundColor}}>
-                  Job id: <span className="job-id">{ this.props.jobId }</span>
-                </div>
-              </div>
-            </div>
-          )
-        }
-        {
           this.props.jobId && this.props.status === "partial_success" && (
             <div className="row" key={`partial-success-div`}>
               <div className="col-sm-9">
@@ -115,7 +104,7 @@ class Results extends React.Component {
         {
           this.props.jobId && this.props.rfam && (
             <div className="row" key={`infernal-div`}>
-              <div className="col-sm-12">
+              <div className="col-sm-12 mt-2">
                 <span className="result-title" style={h3Style}>Rfam classification </span>{ this.props.infernalStatus === "loading" ? <div className="spinner-border spinner-border-sm  mb-1" role="status" /> : '' }
                 { this.props.infernalStatus === "loading" ? '' : this.props.infernalStatus === "success" && this.props.infernalEntries.length ? [
                   <div className="table-responsive mt-1">
