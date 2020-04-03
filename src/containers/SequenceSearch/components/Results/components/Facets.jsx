@@ -18,6 +18,8 @@ class Facets extends React.Component {
       return 'Country'
     } else if (facet==='sequencing_method') {
       return 'Sequencing method'
+    } else if (facet==='host') {
+      return 'Host'
     } else {
       return facet
     }
