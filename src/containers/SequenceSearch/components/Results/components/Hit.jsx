@@ -2,16 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 
 import * as actionCreators from 'actions/actions';
-import images from 'images/expert-db-logos/index'
 
 
 class Hit extends React.Component {
   render() {
-    const expertDb = this.props.entry.fields.expert_db;
-    const newExpertDb = expertDb.map((item) => {
-      return item.toLowerCase();
-    });
-    const showExpertDb = images.filter(({src, title}) => newExpertDb.includes(title));
     const database = this.props.databases;
     let seqTitleStyle = {
       color: this.props.customStyle && this.props.customStyle.seqTitleColor ? this.props.customStyle.seqTitleColor : "",
@@ -26,7 +20,7 @@ class Hit extends React.Component {
         <a className="custom-link" style={seqTitleStyle} href={`https://www.ncbi.nlm.nih.gov/nuccore/${this.props.entry.rnacentral_id}`} target='_blank'>
           {this.props.entry.description}
         </a>
-        {database.length === 0 && <div className="mt-2" style={seqInfoStyle}>{ this.props.entry.rnacentral_id } {showExpertDb.map((db, index) => <img key={index} className="ml-2" src={db.src} style={{height: "16px"}} />)}</div>}
+        {database.length === 0 && <div className="mt-2" style={seqInfoStyle}>{ this.props.entry.rnacentral_id }</div>}
         {database.length === 0 ? '' : <div className="mt-2" style={seqInfoStyle}>{this.props.entry.target_length} nucleotides</div>}
         <div className={this.props.detailsCollapsed ? 'detail-collapsed' : 'mt-1'}>
           <span className="detail">E-value: { this.props.entry.e_value }</span>
