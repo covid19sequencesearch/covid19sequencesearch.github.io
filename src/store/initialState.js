@@ -27,6 +27,7 @@ let initialState = {
   detailsCollapsed: true,
   textSearchError: false,
   filter: "",
+  searchInProgress: [],
 
   // cmscan search
   infernalStatus: statusChoices.notSubmitted,

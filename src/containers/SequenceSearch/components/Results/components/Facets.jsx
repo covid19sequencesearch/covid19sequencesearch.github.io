@@ -2,6 +2,9 @@ import React from 'react';
 import {connect} from "react-redux";
 
 import * as actionCreators from 'actions/actions';
+import {store} from "app.jsx";
+
+import { AiOutlineReload } from 'react-icons/ai';
 
 
 class Facets extends React.Component {
@@ -9,6 +12,14 @@ class Facets extends React.Component {
     super(props);
 
     this.renderFacet = this.renderFacet.bind(this);
+  }
+
+  onReload() {
+    const state = store.getState();
+    if (state.sequence) {
+      store.dispatch(actionCreators.onClearResult());
+      store.dispatch(actionCreators.onSubmit(state.sequence, this.props.databases));
+    }
   }
 
   renameFacet(facet){
@@ -47,13 +58,13 @@ class Facets extends React.Component {
             </li>
           ))
         }
-        <br/>
       </ul>
     ];
   }
 
   render() {
     let showFacet = this.props.hideFacet ? this.props.facets.filter(facet => !this.props.hideFacet.includes(facet.id)) : this.props.facets;
+    const linkColor = this.props.customStyle && this.props.customStyle.linkColor ? this.props.customStyle.linkColor : "#337ab7";
 
     return (
       <div className="row">
@@ -64,12 +75,12 @@ class Facets extends React.Component {
           {
             this.props.textSearchError &&
             <div className="alert alert-danger">
-              <h3>Failed to retrieve text search data.</h3>
-              <a onClick={ this.props.onReload }>&lsaquo; Reload</a>
+              <p>Failed to retrieve text search data.</p>
+              <p><a className="custom-link" onClick={ () => this.onReload() }><AiOutlineReload style={{verticalAlign: '-1px'}} /> Reload</a></p>
             </div>
           }
           <small>
-            Powered by <a className="custom-link" href="http://www.ebi.ac.uk/ebisearch/" target="_blank">EBI Search</a>.
+            Powered by <a className="custom-link" style={{color: linkColor}} href="http://www.ebi.ac.uk/ebisearch/" target="_blank">EBI Search</a>.
           </small>
         </section>
       </div>

@@ -1,14 +1,20 @@
 /* General */
 
-// check https://github.com/styled-components/styled-components to customize the link color
-a {
-  color: #337ab7 !important;
+// used by ebi-visual.css
+body {
+  font-family: Verdana,sans-serif;
+  font-size: 16px;
+}
+
+.btn-icon {
+  vertical-align: 1px;
 }
 
 .custom-link {
   text-decoration: none !important;
   cursor: pointer;
 }
+
 .custom-link:hover {
   text-decoration: underline !important
 }
@@ -44,19 +50,6 @@ input[type="file"] {
 
 
 /* Search results */
-
-.job-id {
-  font-family: Consolas, "Liberation Mono", Courier, monospace;
-  font-weight: normal;
-  padding: 0.125rem 0.3125rem 0.0625rem;
-  overflow-x: auto;
-  font-size: .95rem;
-}
-
-.result-title {
-  font-size: 24px;
-  color: #333;
-}
 
 .alignment {
   font-family: monospace;
@@ -98,6 +91,7 @@ input[type="file"] {
 .detail {
   font-family: monospace;
   margin-right: 20px;
+  color: #333;
 }
 
 .facet {
@@ -127,6 +121,16 @@ input[type="file"] {
   max-width: 768px;
 }
 
+.alignment-rfam-td {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
 tr.noBorder td {
   border: 0 !important;
+}
+
+.desaturate {
+  -webkit-filter: grayscale(60%);
+  filter: grayscale(60%);
 }
