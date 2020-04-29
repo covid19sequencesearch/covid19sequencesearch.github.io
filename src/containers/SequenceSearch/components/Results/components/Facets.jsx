@@ -47,6 +47,7 @@ class Facets extends React.Component {
       <ul key={facet.id} className="list-unstyled facet">
         {
           facet.facetValues.map(facetValue => (
+            facetValue.label === 'True' || facetValue.label === 'False' ? '' :
             <li className="facetValue" key={`li ${facetValue.label}`}>
               <div className="form-check">
                 <input className="form-check-input" id={`checkbox-${facet.id}-${facetValue.value}`} type="checkbox"
