@@ -41,6 +41,7 @@ class Facets extends React.Component {
       color: this.props.customStyle && this.props.customStyle.facetColor ? this.props.customStyle.facetColor : "#007c82",
       fontSize: this.props.customStyle && this.props.customStyle.facetSize ? this.props.customStyle.facetSize : "20px",
     };
+    const linkColor = this.props.customStyle && this.props.customStyle.linkColor ? this.props.customStyle.linkColor : "#337ab7";
     return [
       <legend key={`legend-${facet.id}`}><span style={facetStyle}>{ this.renameFacet(facet.id) }</span></legend>,
       <ul key={facet.id} className="list-unstyled facet">
@@ -53,7 +54,9 @@ class Facets extends React.Component {
                   onClick={(e) => {
                     this.props.onToggleFacet(e, facet, facetValue)
                   }}/>
-                <label className="form-check-label mt-1" htmlFor={`checkbox-${facet.id}-${facetValue.value}`}>{facetValue.label === '2697049' ? 'SARS-Cov-2' : facetValue.label}&nbsp;<small>({facetValue.count})</small></label>
+                <label className="form-check-label mt-1" htmlFor={`checkbox-${facet.id}-${facetValue.value}`}>
+                  <a className="custom-link" style={{color: linkColor}}>{facetValue.label === '2697049' ? 'SARS-Cov-2' : facetValue.label}&nbsp;<small>({facetValue.count})</small></a>
+                </label>
               </div>
             </li>
           ))
