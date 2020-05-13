@@ -1,7 +1,7 @@
 {
-  "name": "@rnacentral/rnacentral-sequence-search-embed",
-  "version": "2.2.3",
-  "description": "Embeddable react component for RNA sequence search.",
+  "name": "@covid19sequencesearch/covid19sequencesearch.github.io",
+  "version": "1.0.0",
+  "description": "Embeddable react component for betacoronavirus sequence similarity search.",
   "scripts": {
     "clean": "rm -rf dist/*",
     "build:prod": "node_modules/.bin/webpack -p --env.prod",
@@ -12,13 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RNAcentral/rnacentral-sequence-search-embed.git"
+    "url": "git+https://github.com/covid19sequencesearch/covid19sequencesearch.github.io.git"
   },
   "keywords": [
+    "betacoronavirus",
+    "covid-19",
     "RNA",
     "sequence",
     "search",
-    "RNAcentral",
     "ncRNA",
     "non-coding",
     "RNA",
@@ -40,9 +41,9 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/RNAcentral/rnacentral-sequence-search-embed/issues"
+    "url": "https://github.com/covid19sequencesearch/covid19sequencesearch.github.io/issues"
   },
-  "homepage": "https://github.com/RNAcentral/rnacentral-sequence-search-embed#readme",
+  "homepage": "https://github.com/covid19sequencesearch/covid19sequencesearch.github.io#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "jquery": "^3.3.1",

@@ -27,15 +27,15 @@ module.exports = function(env) {
     entry: path.join(__dirname, 'src', 'app.jsx'),
     output: {
       path: path.join(__dirname, 'dist'),
-      publicPath: environment === 'production' ? '/rnacentral-sequence-search-embed/dist/' : '/',
-      filename: 'RNAcentral-sequence-search.js'
+      publicPath: environment === 'production' ? '/covid19sequencesearch.github.io/dist/' : '/',
+      filename: 'covid19-sequence-search.js'
     },
     resolve: {
       modules: [path.join(__dirname, 'src'), path.join(__dirname, 'node_modules')]
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new ExtractTextPlugin('RNAcentral-sequence-search.css'),
+      new ExtractTextPlugin('covid19-sequence-search.css'),
       new HtmlWebpackPlugin({
         inject: "body",
         template: "src/index.html",
