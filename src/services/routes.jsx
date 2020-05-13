@@ -1,5 +1,4 @@
-let server = process.env.REACT_APP_SERVER ? process.env.REACT_APP_SERVER : 'https://search.rnacentral.org';
-let ebiDevOrProd = process.env.REACT_APP_BRANCH === 'dev' ? 'wwwdev' : 'www';
+let server = 'http://193.62.55.100:8002';
 
 module.exports = {
   rnacentralDatabases: () => `${server}/api/rnacentral-databases`,
@@ -12,6 +11,4 @@ module.exports = {
   consumersStatuses:   () => `${server}/api/consumers-statuses`,
   infernalJobStatus:   (jobId) => `${server}/api/infernal-status/${jobId}`,
   infernalJobResult:   (resultId) => `${server}/api/infernal-result/${resultId}`,
-  searchEndpoint:      (query) => `https://${ebiDevOrProd}.ebi.ac.uk/ebisearch/ws/rest/rnacentral?query=${query}&fields=description,url&format=json&sort=boost:descending`,
-  rnacentralUrs:       (urs) => `https://rnacentral.org/api/v1/rna/${urs}`,
 };

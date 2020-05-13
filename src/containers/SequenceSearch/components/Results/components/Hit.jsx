@@ -15,7 +15,6 @@ class Hit extends React.Component {
     });
     const showExpertDb = images.filter(({src, title}) => newExpertDb.includes(title));
     const database = this.props.databases;
-    const exactMatchUrsId = this.props.exactMatchUrsId.indexOf(this.props.entry.rnacentral_id) > -1 ? <FaCheckCircle style={{color: '#3c763d', verticalAlign: '-1px'}}/> : '';
     let seqTitleStyle = {
       color: this.props.customStyle && this.props.customStyle.linkColor ? this.props.customStyle.linkColor : "#337ab7",
       fontSize: this.props.customStyle && this.props.customStyle.seqTitleSize ? this.props.customStyle.seqTitleSize : "20px",
@@ -26,7 +25,7 @@ class Hit extends React.Component {
     };
     return (
       <li>
-        {exactMatchUrsId} <a className="custom-link" style={seqTitleStyle} href={database.length !== 0 && this.props.entry.fields && this.props.entry.fields.url && this.props.entry.fields.url.length ? this.props.entry.fields.url[0] : `https://rnacentral.org/rna/${this.props.entry.rnacentral_id}`} target='_blank'>
+        <a className="custom-link" style={seqTitleStyle} href={`https://www.ncbi.nlm.nih.gov/nuccore/${this.props.entry.rnacentral_id}`} target='_blank'>
           {this.props.entry.description}
         </a>
         {database.length === 0 && <div className="text-muted mt-2" style={seqInfoStyle}>{ this.props.entry.rnacentral_id } {showExpertDb.map((db, index) => <img key={index} className="ml-2 desaturate" src={db.src} style={{height: "16px"}} />)}</div>}

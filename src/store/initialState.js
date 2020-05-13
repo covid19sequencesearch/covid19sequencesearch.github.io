@@ -12,7 +12,6 @@ let initialState = {
   sequence: "",
   hits: null,
   fileUpload: false,
-  exactMatch: null,
   rnacentral: false,
 
   // nhmmer search

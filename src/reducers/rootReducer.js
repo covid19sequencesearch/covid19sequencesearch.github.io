@@ -194,7 +194,6 @@ const rootReducer = function (state = initialState, action) {
         infernalStatus: "loading",
         infernalEntries: [],
         infernalAlignmentsCollapsed: true,
-        exactMatch: null,
         filter: "",
       });
 
@@ -213,13 +212,6 @@ const rootReducer = function (state = initialState, action) {
 
     case actions.SET_STATUS_TIMEOUT:
       return Object.assign({}, state, {statusTimeout: action.statusTimeout});
-
-    case actions.EXACT_MATCH:
-      if (!action.data) {
-        return Object.assign({}, state, {});
-      } else {
-        return Object.assign({}, state, {exactMatch: action.data});
-      }
 
     case actions.FILTER_CHANGE:
       return Object.assign({}, state, {filter: action.data});
@@ -296,7 +288,6 @@ const rootReducer = function (state = initialState, action) {
         infernalEntries: [],
         infernalAlignmentsCollapsed: true,
         fileUpload: false,
-        exactMatch: null,
         rnacentral: false,
         submissionError: null,
       });

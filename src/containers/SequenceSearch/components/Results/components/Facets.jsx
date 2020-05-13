@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 
 import * as actionCreators from 'actions/actions';
 import {store} from "app.jsx";
-import ReactGA from 'react-ga';
 
 import { AiOutlineReload } from 'react-icons/ai';
 
@@ -24,38 +23,17 @@ class Facets extends React.Component {
   }
 
   renameFacet(facet){
-    if (facet==='QC warning found') {
-      return 'QC warnings'
-    } else if (facet==='Has GO annotation') {
-      return 'GO annotations'
-    } else if (facet==='Has Conserved structure') {
-      return 'Conserved motifs'
+    if (facet==='TAXONOMY') {
+      return 'Viruses'
+    } else if (facet==='country') {
+      return 'Country'
+    } else if (facet==='sequencing_method') {
+      return 'Sequencing method'
+    } else if (facet==='host') {
+      return 'Host'
     } else {
       return facet
     }
-  }
-
-  facetClickTrack(facet){
-    const trackingID = this.props.customStyle && this.props.customStyle.trackingID ? this.props.customStyle.trackingID : "";
-    trackingID ? ReactGA.initialize(trackingID) : '';
-    trackingID ? ReactGA.event({ category: 'facet', action: 'click', label: facet }) : '';
-  }
-
-  renameFacetValue(facet, facetValue){
-    const linkColor = this.props.customStyle && this.props.customStyle.linkColor ? this.props.customStyle.linkColor : "#337ab7";
-    if (facet==='qc_warning_found'){
-      if (facetValue.label==='False') {facetValue.label = 'No warnings'}
-      else if (facetValue.label==='True') {facetValue.label = 'Warnings found'}
-    }
-    if (facet==='has_go_annotations') {
-      if (facetValue.label==='True') { facetValue.label = 'Found'; }
-      else if (facetValue.label==='False') { facetValue.label = 'Not found'; }
-    }
-    if (facet==='has_conserved_structure') {
-      if (facetValue.label === 'True') { facetValue.label = 'Found'; }
-      else if (facetValue.label === 'False') { facetValue.label = 'Not found'; }
-    }
-    return <a className="custom-link" onClick={() => this.facetClickTrack(facet)} style={{color: linkColor}}>{facetValue.label}&nbsp;<small>({facetValue.count})</small></a>
   }
 
   renderFacet(facet) {
@@ -63,11 +41,13 @@ class Facets extends React.Component {
       color: this.props.customStyle && this.props.customStyle.facetColor ? this.props.customStyle.facetColor : "#007c82",
       fontSize: this.props.customStyle && this.props.customStyle.facetSize ? this.props.customStyle.facetSize : "20px",
     };
+    const linkColor = this.props.customStyle && this.props.customStyle.linkColor ? this.props.customStyle.linkColor : "#337ab7";
     return [
-      <legend key={`legend-${facet.id}`}><span style={facetStyle}>{ this.renameFacet(facet.label) }</span></legend>,
+      <legend key={`legend-${facet.id}`}><span style={facetStyle}>{ this.renameFacet(facet.id) }</span></legend>,
       <ul key={facet.id} className="list-unstyled facet">
         {
           facet.facetValues.map(facetValue => (
+            facetValue.label === 'True' || facetValue.label === 'False' ? '' :
             <li className="facetValue" key={`li ${facetValue.label}`}>
               <div className="form-check">
                 <input className="form-check-input" id={`checkbox-${facet.id}-${facetValue.value}`} type="checkbox"
@@ -76,7 +56,7 @@ class Facets extends React.Component {
                     this.props.onToggleFacet(e, facet, facetValue)
                   }}/>
                 <label className="form-check-label mt-1" htmlFor={`checkbox-${facet.id}-${facetValue.value}`}>
-                  { this.renameFacetValue(facet.id, facetValue) }
+                  <a className="custom-link" style={{color: linkColor}}>{facetValue.label === '2697049' ? 'SARS-Cov-2' : facetValue.label}&nbsp;<small>({facetValue.count})</small></a>
                 </label>
               </div>
             </li>

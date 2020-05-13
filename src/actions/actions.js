@@ -415,30 +415,11 @@ export function onToggleDetailsCollapsed() {
 }
 
 export function onSequenceTextAreaChange(event) {
-  return function(dispatch) {
-    let sequence = event.target.value;
-    dispatch({type: types.TEXTAREA_CHANGE, sequence: sequence});
-
-    return fetch(routes.searchEndpoint(md5(sequence.toUpperCase().replace(/U/g, 'T'))))
-      .then((response) => {
-        if (response.ok) { return response.json(); }
-        else { throw response; }
-      })
-      .then(data => dispatch({type: types.EXACT_MATCH, data: data}))
-  }
+  return {type: types.TEXTAREA_CHANGE, sequence: event.target.value}
 }
 
 export function onExampleSequence(sequence) {
-  return function(dispatch) {
-    dispatch({type: types.EXAMPLE_SEQUENCE, sequence: sequence});
-
-    return fetch(routes.searchEndpoint(md5(sequence.toUpperCase().replace(/U/g, 'T'))))
-      .then((response) => {
-        if (response.ok) { return response.json(); }
-        else { throw response; }
-      })
-      .then(data => dispatch({type: types.EXACT_MATCH, data: data}))
-  }
+  return {type: types.EXAMPLE_SEQUENCE, sequence: sequence}
 }
 
 export function onFilterChange(event) {
