@@ -43,7 +43,7 @@ export function onSubmit(sequence, databases) {
     fetch(routes.submitJob(), {
       method: 'POST',
       mode: 'cors',
-      credentials: 'false',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ export function onMultipleSubmit(sequence, databases) {
       newQuery && fetch(routes.submitJob(), {
         method: 'POST',
         mode: 'cors',
-        credentials: 'false',
+        credentials: 'include',
         headers: {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json'
@@ -157,7 +157,7 @@ export function fetchStatus(jobId) {
     fetch(routes.jobStatus(jobId), {
       method: 'GET',
       mode: 'cors',
-      credentials: 'false',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -212,7 +212,7 @@ export function fetchInfernalStatus(jobId) {
     fetch(routes.infernalJobStatus(jobId), {
       method: 'GET',
       mode: 'cors',
-      credentials: 'false',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -249,7 +249,7 @@ export function fetchResults(jobId) {
     fetch(routes.facetsSearch(jobId, buildQuery(state.selectedFacets), 0, 20, 'e_value'), {
       method: 'GET',
       mode: 'cors',
-      credentials: 'false',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -274,7 +274,7 @@ export function fetchInfernalResults(jobId) {
     fetch(routes.infernalJobResult(jobId), {
       method: 'GET',
       mode: 'cors',
-      credentials: 'false',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -310,7 +310,7 @@ export function onFilterResult() {
     fetch(routes.facetsSearch(state.jobId, buildQuery(selectedFacets), 0, state.size, state.ordering), {
       method: 'GET',
       mode: 'cors',
-      credentials: 'false',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -461,7 +461,7 @@ export function numberOfConsumers() {
     fetch(routes.consumersStatuses(), {
       method: 'GET',
       mode: 'cors',
-      credentials: 'false',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -480,7 +480,7 @@ export function checkAllJobs() {
     fetch(routes.jobsStatuses(), {
       method: 'GET',
       mode: 'cors',
-      credentials: 'false',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
