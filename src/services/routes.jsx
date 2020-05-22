@@ -1,4 +1,4 @@
-let server = 'https://cors-anywhere.herokuapp.com/http://193.62.55.100:8002';
+let server = 'http://193.62.55.100:8002';
 
 module.exports = {
   rnacentralDatabases: () => `${server}/api/rnacentral-databases`,
