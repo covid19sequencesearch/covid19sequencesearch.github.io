@@ -1,4 +1,4 @@
-let server = 'http://193.62.55.100:8002';
+let server = 'https://test.rnacentral.org/covid-search';
 
 module.exports = {
   rnacentralDatabases: () => `${server}/api/rnacentral-databases`,
