@@ -1,7 +1,6 @@
 import * as types from './actionTypes';
 import routes from 'services/routes.jsx';
 import {store} from 'app.jsx';
-import md5 from 'md5';
 
 
 /**
