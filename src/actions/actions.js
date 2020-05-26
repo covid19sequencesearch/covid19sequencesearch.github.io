@@ -42,7 +42,7 @@ export function onSubmit(sequence, databases) {
     fetch(routes.submitJob(), {
       method: 'POST',
       mode: 'cors',
-      credentials: 'include',
+      // credentials: 'include',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
