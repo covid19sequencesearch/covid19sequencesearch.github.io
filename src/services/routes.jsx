@@ -1,4 +1,4 @@
-let server = 'https://test.rnacentral.org/covid-search';
+let server = 'https://proxy.rnacentral.org';
 
 module.exports = {
   rnacentralDatabases: () => `${server}/api/rnacentral-databases`,
