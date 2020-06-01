@@ -60,7 +60,7 @@ class SearchForm extends React.Component {
         { this.props.admin ? <Admin customStyle={this.props.customStyle} /> : '' }
         <div className="row">
           <div className="col-sm-9">
-            <small className="text-muted" style={{display: hideRnacentral}}><img src={'https://rnacentral.org/static/img/logo/rnacentral-logo.png'} alt="RNAcentral logo" style={{width: "1%", verticalAlign: "text-top"}}/> Powered by <a className="custom-link mr-2" style={{color: linkColor}} target='_blank' href='https://rnacentral.org/'>RNAcentral</a>|</small>
+            <small className="text-muted" style={{display: hideRnacentral}}><img src={'https://rnacentral.org/static/img/logo/rnacentral-logo.png'} alt="RNAcentral logo" style={{width: "2%", verticalAlign: "text-top"}}/> Powered by <a className="custom-link mr-2" style={{color: linkColor}} target='_blank' href='https://rnacentral.org/'>RNAcentral</a>|</small>
             <small className="text-muted ml-2">Local alignment using <a target='_blank' className="custom-link" style={{color: linkColor}} href='https://www.ncbi.nlm.nih.gov/pubmed/23842809'>nhmmer</a></small>
             { this.props.jobId ? <small className="text-muted float-right">Job id: {this.props.jobId}</small> : ''}
           </div>
