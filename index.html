@@ -1,10 +1,32 @@
 <!doctype html>
 <html>
   <head>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Sequence search</title>
   </head>
   <body>
-    <rnacentral-sequence-search
+
+    <header>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <strong>Betacoronavirus sequence similarity search</strong>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+      <section class="jumbotron text-center" style="padding: 20px">
+        <div class="container">
+          <p class="lead text-muted">Search a collection of 7,874 betacoronavirus sequences and use facets to filter the results. The sequences were extracted from the <a href="https://ftp.ncbi.nlm.nih.gov/blast/db/Betacoronavirus.tar.gz" target="_blank">NCBI Blast database</a> and the metadata was obtained from the associated INSDC entries.</p>
+        </div>
+      </section>
+
+      <div class="container">
+        <rnacentral-sequence-search
             databases='["betacoronavirus"]'
             examples='[
               {"description": "5&#x27; UTR fragment", "urs": "", "sequence": "ATATTAGGTTTTTACCTACCCAGGAAAAGCCAACCAACCTCGATCTCTTGTAGATCTGTTCTCTAAACGAACTTTAAAATCTGTGTAGCTGTCGCTCGGCTGCATGCCTAGTGCACCTACGCAGTATAAACAATAATAAACTTTACTGTCGTTGACAAGAAACGAGTAACTCGTCCCTCTTCTGCAGACTGCTTACGGTTTCGTCCGTGTTGCAGTCGATCATCAGCATACCTAGGTTTCGTCCGGGTGTGACCGAAAGGTAAGATGGAGAGCCTTGTTCTTGGAATCAACGAGAAAACA"},
@@ -16,6 +38,11 @@
             customStyle='{
               "hideUploadButton": "true"
             }'
-    />
+        />
+      </div>
+    </main>
+
+    <!-- Sequence search JS -->
+    <script type="text/javascript" src="/covid19sequencesearch.github.io/dist/covid19-sequence-search.js"></script>
   <script type="text/javascript" src="/covid19sequencesearch.github.io/dist/covid19-sequence-search.js"></script></body>
 </html>
