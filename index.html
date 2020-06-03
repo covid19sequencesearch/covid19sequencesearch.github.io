@@ -1,31 +1,70 @@
 <!doctype html>
-<html>
+<html class="h-100">
   <head>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Sequence search</title>
+    <meta name="description" content="Search thousands of betacoronavirus sequences and explore results by virus, host, country, and more">
+    <meta name="keywords" content="SARS-CoV-2, COVID-19, betacoronavirus, nhmmer, Rfam, blast">
+    <meta name="twitter:image" content="https://rfam.org/static/images/coronavirus/sarbecovirus.png" />
+    <title>Betacoronavirus sequence similarity search</title>
   </head>
-  <body>
+  <body class="d-flex flex-column h-100">
 
     <header>
-      <div class="navbar navbar-dark bg-dark box-shadow">
+      <div class="navbar navbar-dark navbar-expand-lg bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
           <a href="#" class="navbar-brand d-flex align-items-center">
             <strong>Betacoronavirus sequence similarity search</strong>
           </a>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="https://github.com/covid19sequencesearch/covid19sequencesearch.github.io/issues">Feedback 💬</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
 
     <main role="main">
-      <section class="jumbotron text-center" style="padding: 20px">
-        <div class="container">
-          <p class="lead text-muted">Search a collection of 7,874 betacoronavirus sequences and use facets to filter the results. The sequences were extracted from the <a href="https://ftp.ncbi.nlm.nih.gov/blast/db/Betacoronavirus.tar.gz" target="_blank">NCBI Blast database</a> and the metadata was obtained from the associated INSDC entries.</p>
+      <section class="jumbotron text-center" style="padding: 10px">
+        <div class="container small" style="text-align: left!important;">
+          <p class="lead">Search <span id="database-size"></span> betacoronavirus sequences and explore results by virus, host, country, and more</p>
+
+          <p>
+            This website is produced and maintained by the <a href="https://rnacentral.org">RNAcentral</a> team at <a href="https://www.ebi.ac.uk">EMBL-EBI</a>.
+
+            To support the research into SARS-CoV-2 and other betacoronaviruses, we adapted the infrastructure from the RNAcentral <a href="https://rnacentral.org/sequence-search">sequence similarity search</a> to query a set of betacoronavirus sequences using <a href="https://www.ncbi.nlm.nih.gov/pubmed/23842809">nhmmer</a> and explore the results using facets from <a href="https://www.ebi.ac.uk/ebisearch">EBI Search</a>.
+          </p>
+
+          <strong>FAQ</strong>
+
+          <ul class="list-inline" style="display: inline; margin-left: 10px;">
+            <li class="list-inline-item">
+              <a href="#" data-toggle="modal" data-target="#blastModal">
+                How does this search compare with BLAST?
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" data-toggle="modal" data-target="#sourceModal">
+                Where do the sequences come from?
+              </a>
+            </li>
+          </ul>
+
+          <p style="margin-top: 5px;">
+            <strong>Let us know</strong> if you find this tool useful or notice any problems by <a href="https://github.com/covid19sequencesearch/covid19sequencesearch.github.io/issues">raising an issue on GitHub &rarr;</a>
+          </p>
+
+          <p class="lead font-weight-bold">Get started by clicking examples below</p>
+
         </div>
       </section>
 
       <div class="container">
+
         <rnacentral-sequence-search
             databases='["betacoronavirus"]'
             examples='[
@@ -40,9 +79,121 @@
             }'
         />
       </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+
+            <!-- Modals -->
+            <div class="modal fade" id="blastModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+
+                    <h5>Comparison with BLAST</h5>
+
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      This search uses the same sequences as <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastSearch&PROG_DEF=blastn&BLAST_PROG_DEF=megaBlast&DATABASE=genomic/Viruses/Betacoronavirus">NCBI BLAST</a>, with the following differences:
+
+                      <ul>
+                        <li>Support for facets and keyword searches for exploring results</li>
+                        <li>Use <em>nhmmer</em> as the search engine</li>
+                        <li>Explore up to 1,000 top hits (compared to 100 in BLAST)</li>
+                        <li>Integration with <a href="https://rfam.org/covid-19">Rfam</a> to annotate structured RNA elements</li>
+                      </ul>
+                    </p>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="modal fade" id="sourceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+
+                    <h5>Where do the sequences come from?</h5>
+
+                  </div>
+                  <div class="modal-body">
+                    The sequences are regularly extracted from the <a href="https://ftp.ncbi.nlm.nih.gov/blast/db/Betacoronavirus.tar.gz" target="_blank">NCBI BLAST database</a> and the metadata is retrieved from the associated INSDC entries.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
     </main>
+
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <hr>
+        <a href="https://www.ebi.ac.uk">
+          <img src="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/EMBL_EBI_Logo_black.svg" style="width: 120px;">
+        </a>
+        <a href="https://www.covid19dataportal.org/">
+          <img src="https://www.covid19dataportal.org/assets/img/CV19DP_logo_oneliner2.svg" style="width: 200px; margin-left: 20px;">
+        </a>
+        <a href="https://rnacentral.org/">
+          <img src="https://rnacentral.org/static/img/logo/rnacentral_logo_dark_grey.png" style="width: 140px; margin-left: 10px;">
+        </a>
+        <a href="https://rfam.org/covid-19">
+          <img src="https://docs.rfam.org/en/latest/_static/rfam.png" style="width: 100px; margin-left: 10px;">
+        </a>
+        <a href="https://github.com/covid19sequencesearch/covid19sequencesearch.github.io" class="float-right">
+          <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style="width: 40px;">
+          <span class="small text-muted">Code on GitHub</span>
+        </a>
+      </div>
+    </footer>
 
     <!-- Sequence search JS -->
     <script type="text/javascript" src="/covid19sequencesearch.github.io/dist/covid19-sequence-search.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        var getJSON = function(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'json';
+            xhr.onload = function() {
+              var status = xhr.status;
+              if (status === 200) {
+                callback(null, xhr.response);
+              } else {
+                callback(status, xhr.response);
+              }
+            };
+            xhr.send();
+        };
+
+        (function() {
+            getJSON('https://wwwdev.ebi.ac.uk/ebisearch/ws/rest/rnacentral-covid?format=json',
+            function(err, data) {
+              if (err !== null) {
+                console.log('Failed to retrieve sequence count: ' + err);
+              } else {
+                document.getElementById('database-size').innerHTML = data.domains[0].indexInfos[0].value;
+              }
+            });
+        })();
+    </script>
+
   </body>
 </html>
