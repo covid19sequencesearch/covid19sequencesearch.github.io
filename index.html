@@ -1,19 +1,32 @@
 <!doctype html>
-<html>
+<html class="h-100">
   <head>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Sequence search</title>
+    <meta name="description" content="Search betacoronavirus sequences using any sequence as a query and explore results by virus, host, country, and more">
+    <meta name="keywords" content="SARS-CoV-2, COVID-19, betacoronavirus, nhmmer, Rfam, blast">
+    <meta name="twitter:image" content="https://rfam.org/static/images/coronavirus/sarbecovirus.png" />
+    <title>Betacoronavirus sequence similarity search</title>
   </head>
-  <body>
+  <body class="d-flex flex-column h-100">
 
     <header>
-      <div class="navbar navbar-dark bg-dark box-shadow">
+      <div class="navbar navbar-dark navbar-expand-lg bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
           <a href="#" class="navbar-brand d-flex align-items-center">
             <strong>Betacoronavirus sequence similarity search</strong>
           </a>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#feedback">Feedback</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
@@ -21,7 +34,7 @@
     <main role="main">
       <section class="jumbotron text-center" style="padding: 20px">
         <div class="container">
-          <p class="lead text-muted">Search a collection of 7,874 betacoronavirus sequences and use facets to filter the results. The sequences were extracted from the <a href="https://ftp.ncbi.nlm.nih.gov/blast/db/Betacoronavirus.tar.gz" target="_blank">NCBI Blast database</a> and the metadata was obtained from the associated INSDC entries.</p>
+          <p class="lead text-muted" style="text-align: left!important;">Search <span id="database-size"></span> betacoronavirus sequences and explore results by virus, host, country, and more
         </div>
       </section>
 
@@ -40,9 +53,95 @@
             }'
         />
       </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+
+            <h3 id="about">About</h3>
+
+            <p>
+              This website is produced and maintained by the <a href="https://rnacentral.org">RNAcentral</a> team at <a href="https://www.ebi.ac.uk">EMBL-EBI</a>.
+            </p>
+
+            <p>
+              To support the research into SARS-CoV-2 and other betacoronaviruses, we adapted the infrastructure from the RNAcentral <a href="https://rnacentral.org/sequence-search">sequence similarity search</a> to query a set of betacoronavirus sequences using <a href="https://www.ncbi.nlm.nih.gov/pubmed/23842809">nhmmer</a> and explore the results using facets from <a href="https://www.ebi.ac.uk/ebisearch">EBI Search</a>.
+
+              The sequences are regularly extracted from the <a href="https://ftp.ncbi.nlm.nih.gov/blast/db/Betacoronavirus.tar.gz" target="_blank">NCBI BLAST database</a> and the metadata is retrieved from the associated INSDC entries.
+            </p>
+
+            <p>
+              The code is available on <a href="https://github.com/covid19sequencesearch/covid19sequencesearch.github.io">GitHub</a>.
+            </p>
+
+            <h5>Comparison with BLAST</h5>
+
+            <p>
+              This search uses the same sequences as <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastSearch&PROG_DEF=blastn&BLAST_PROG_DEF=megaBlast&DATABASE=genomic/Viruses/Betacoronavirus">NCBI BLAST</a>, with the following differences:
+
+              <ul>
+                <li>Support for facets and keyword searches for exploring results</li>
+                <li>Use <em>nhmmer</em> as the search engine</li>
+                <li>Explore up to 1,000 top hits (compared to 100 in BLAST)</li>
+                <li>Integration with <a href="https://rfam.org/covid-19">Rfam</a> to annotate structured RNA elements</li>
+              </ul>
+            </p>
+
+            <h3 id="feedback">Get in touch</h3>
+
+            <p>
+              Please let us know if you find this tool useful or notice any problems by <a href="https://github.com/covid19sequencesearch/covid19sequencesearch.github.io/issues">raising an issue</a> on GitHub.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
     </main>
+
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <hr>
+        <a href="https://www.ebi.ac.uk">
+          <img src="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/EMBL_EBI_Logo_black.svg" style="width: 120px;">
+        </a>
+        <a href="https://www.covid19dataportal.org/">
+          <img src="https://www.covid19dataportal.org/assets/img/CV19DP_logo_oneliner2.svg" style="width: 200px; margin-left: 20px;">
+        </a>
+      </div>
+    </footer>
 
     <!-- Sequence search JS -->
     <script type="text/javascript" src="/covid19sequencesearch.github.io/dist/covid19-sequence-search.js"></script>
+
+    <script>
+        var getJSON = function(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'json';
+            xhr.onload = function() {
+              var status = xhr.status;
+              if (status === 200) {
+                callback(null, xhr.response);
+              } else {
+                callback(status, xhr.response);
+              }
+            };
+            xhr.send();
+        };
+
+        (function() {
+            getJSON('https://wwwdev.ebi.ac.uk/ebisearch/ws/rest/rnacentral-covid?format=json',
+            function(err, data) {
+              if (err !== null) {
+                console.log('Failed to retrieve sequence count: ' + err);
+              } else {
+                document.getElementById('database-size').innerHTML = data.domains[0].indexInfos[0].value;
+              }
+            });
+        })();
+    </script>
+
   </body>
 </html>
