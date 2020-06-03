@@ -53,7 +53,7 @@ The example below changes the color of the buttons:
 />
 ```
 
-For a minimal example, see [index.html](./index.html).
+For a minimal example, see [example.html](./example.html).
 
 ## Attributes/parameters
 
