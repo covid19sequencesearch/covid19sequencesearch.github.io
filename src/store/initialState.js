@@ -28,6 +28,8 @@ let initialState = {
   textSearchError: false,
   filter: "",
   searchInProgress: [],
+  downloadStatus: statusChoices.notSubmitted,
+  downloadEntries: [],
 
   // cmscan search
   infernalStatus: statusChoices.notSubmitted,

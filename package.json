@@ -1,6 +1,6 @@
 {
   "name": "@covid19sequencesearch/covid19sequencesearch.github.io",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Embeddable react component for betacoronavirus sequence similarity search.",
   "scripts": {
     "clean": "rm -rf dist/*",
@@ -46,7 +46,9 @@
   "homepage": "https://github.com/covid19sequencesearch/covid19sequencesearch.github.io#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "file-saver": "^2.0.2",
     "jquery": "^3.3.1",
+    "jszip": "^3.5.0",
     "md5": "^2.2.1",
     "react": "^16.13.1",
     "react-csv": "^1.1.2",

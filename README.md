@@ -1,6 +1,6 @@
 # Betacoronavirus sequence search embed
 
-This is an embeddable component that you can include into your website to add a non-coding RNA sequence search.
+This is an embeddable component that you can include into your website to add a Betacoronavirus sequence search.
 
 The component sends search requests to EBI-backed API, run on EBI cloud infrastructure. It uses NHMMER, CMSCAN and 
 also adds text search functionality, backed by EBI Lucene text search plugin.
@@ -25,13 +25,13 @@ directly or through an import with Webpack:
 To use it just insert an html tag somewhere in your html:
 
 ```
-<rnacentral-sequence-search databases='["betacoronavirus"]' />
+<betacoronavirus-sequence-search databases='["betacoronavirus"]' />
 ```
 
 To show some examples and/or enable the Rfam search, use:
 
 ```
-<rnacentral-sequence-search 
+<betacoronavirus-sequence-search 
     databases='["betacoronavirus"]'
     examples='[
         {"description": "2019-nCoV_N1-R primer", "urs": "", "sequence": "TCTGGTTACTGCCAGTTGAATCTG"}
@@ -44,7 +44,7 @@ You can also customise some elements of this embeddable component. See what you 
 The example below changes the color of the buttons:
 
 ```
-<rnacentral-sequence-search
+<betacoronavirus-sequence-search
     databases='["betacoronavirus"]'
     customStyle='{
       "searchButtonColor": "#007c82",

@@ -13,7 +13,7 @@ import sequenceSearchStyles from 'styles/sequence-search.scss';
 export const store = configureStore();
 
 
-class RNAcentralSequenceSearch extends HTMLElement {
+class BetacoronavirusSequenceSearch extends HTMLElement {
   constructor() {
     super();
 
@@ -65,4 +65,4 @@ class RNAcentralSequenceSearch extends HTMLElement {
   }
 }
 
-customElements.define('rnacentral-sequence-search', RNAcentralSequenceSearch);
+customElements.define('betacoronavirus-sequence-search', BetacoronavirusSequenceSearch);

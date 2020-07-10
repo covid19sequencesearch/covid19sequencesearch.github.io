@@ -261,7 +261,10 @@ export function fetchResults(jobId) {
         throw response;
       }
     })
-    .then(data => dispatch({type: types.FETCH_RESULTS, status: 'success', data: data}))
+    .then(data => {
+      dispatch({type: types.FETCH_RESULTS, status: 'success', data: data});
+      dispatch(dataForDownload());
+    })
     .catch(error => {
       dispatch({type: types.FETCH_RESULTS, status: 'error'})
     });
@@ -322,7 +325,10 @@ export function onFilterResult() {
         throw response;
       }
     })
-    .then(data => dispatch({type: types.FETCH_RESULTS, status: 'success', data: data}))
+    .then(data => {
+      dispatch({type: types.FETCH_RESULTS, status: 'success', data: data})
+      dispatch(dataForDownload());
+    })
     .catch(error => {dispatch({type: types.FETCH_RESULTS, status: 'error'})});
   }
 }
@@ -354,14 +360,17 @@ export function onToggleFacet(event, facet, facetValue) {
         if (response.ok) { return response.json(); }
         else { throw response; }
       })
-      .then(data => dispatch({
-        type: types.TOGGLE_FACET,
-        id: facet.id,
-        value: facetValue.value,
-        data: data,
-        status: 'success',
-        selectedFacets: selectedFacets
-      }))
+      .then(data => {
+        dispatch({
+          type: types.TOGGLE_FACET,
+          id: facet.id,
+          value: facetValue.value,
+          data: data,
+          status: 'success',
+          selectedFacets: selectedFacets
+        })
+        dispatch(dataForDownload());
+      })
       .catch((response) => dispatch({ type: types.FAILED_FETCH_RESULTS, status: "error", start: 0 }));
   }
 }
@@ -400,7 +409,10 @@ export function onSort(event) {
         if (response.ok) { return response.json(); }
         else { throw response; }
       })
-      .then(data => dispatch({type: types.SORT_RESULTS, data: data}))
+      .then(data => {
+        dispatch({type: types.SORT_RESULTS, data: data, ordering: ordering});
+        dispatch(dataForDownload());
+      })
       .catch(response => dispatch({ type: types.FAILED_FETCH_RESULTS, status: "error", start: 0 }));
   };
 }
@@ -445,6 +457,60 @@ export function onFileUpload (event) {
     fileReader.readAsText(event.target.files[0]);
     return fileReader;
   };
+}
+
+export function dataForDownload() {
+  let state = store.getState();
+  let iterations = 1;
+
+  if (state.hitCount>100 && state.hitCount<=200) {
+    iterations = 2
+  } else if (state.hitCount>200 && state.hitCount<=300) {
+    iterations = 3
+  } else if (state.hitCount>300 && state.hitCount<=400) {
+    iterations = 4
+  } else if (state.hitCount>400 && state.hitCount<=500) {
+    iterations = 5
+  } else if (state.hitCount>500 && state.hitCount<=600) {
+    iterations = 6
+  } else if (state.hitCount>600 && state.hitCount<=700) {
+    iterations = 7
+  } else if (state.hitCount>700 && state.hitCount<=800) {
+    iterations = 8
+  } else if (state.hitCount>800 && state.hitCount<=900) {
+    iterations = 9
+  } else if (state.hitCount>900) {
+    iterations = 10
+  }
+
+  return async function(dispatch) {
+    dispatch({type: types.DOWNLOAD, status: "clear"})
+    let start = 0;
+    for (let i=0; i<iterations; i++) {
+      await fetch(routes.facetsSearch(state.jobId, buildQuery(state.selectedFacets), start, 100, state.ordering), {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(response) {
+        if (response.ok) { return response.json() }
+        else { throw response }
+      })
+      .then((data) => {
+        if (i===iterations-1) {
+          dispatch({type: types.DOWNLOAD, status: "success", data: data.entries})
+        } else {
+          dispatch({type: types.DOWNLOAD, status: "loading", data: data.entries})
+        }
+      })
+      .catch(response => dispatch({ type: types.DOWNLOAD, status: "error" }));
+      start+=100;
+    }
+  }
 }
 
 export function onShowAdmin() {
